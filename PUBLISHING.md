@@ -1,25 +1,42 @@
-# Publishing this blank template
+# Using and publishing this template
 
-The included archive is a **prepared local repository tree**, not yet a remote GitHub repository. Review every file before publishing it publicly.
+The public repository is available as a GitHub Template repository. For normal use, start from the repository page and select **Use this template → Create a new repository**. This creates an independent repository without copying the template's commit history.
 
-## Using the GitHub CLI (recommended)
+## Recommended use
 
-Install `git`, Python 3.10+ and the [GitHub CLI](https://cli.github.com/); run `gh auth login` first. Extract the ZIP, enter the extracted directory, and run:
+1. Open the public `HSRT-Knowledge-Vault-Template` repository.
+2. Select **Use this template**.
+3. Choose a new repository name and the required visibility.
+4. Clone the new repository.
+5. Install the development checks and verify the blank instance:
 
-```sh
+~~~sh
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s tests -v
+python scripts/validate_vault.py .
+python scripts/audit_public.py .
+~~~
+
+Do not use an existing private research repository as the destination. A generated instance starts with the generic, source-free template and its own history.
+
+## Maintainer publication from a local archive
+
+The bundled publication script remains available for maintainers creating a separate template repository from a reviewed local export:
+
+~~~sh
 python -m pip install -r requirements-dev.txt
 python -m unittest discover -s tests -v
 python scripts/validate_vault.py .
 python scripts/audit_public.py .
 bash scripts/publish_public.sh HSRT-Knowledge-Vault-Template
-```
+~~~
 
-The script asks for explicit confirmation before creating a **public** repository in your authenticated GitHub account, pushes the clean template, and marks it as a **Template repository**. It refuses to run if a Git remote is already attached, to avoid publishing an existing research repository by accident.
+The script requires explicit confirmation before creating a public repository, refuses an existing Git remote, pushes a new history, and enables GitHub's Template repository option.
 
-## Without the CLI
+## Disclosure-check scope
 
-Create a new **public** repository in GitHub, without initializing it with a README. In the extracted template directory initialize Git and push the prepared files to that **new** remote. Then open GitHub **Settings → General → Template repository** and enable that option. The existing private research repo must **never** be used as the remote for this export.
+The disclosure audit permits only a small allowlist of UTF-8 text formats and the known extensionless files `LICENSE`, `.gitignore`, and `.gitkeep`. PDFs, Office documents, archives, images, executables, unknown extensions, symbolic links, oversized text files, and non-UTF-8 content block publication until a maintainer deliberately reviews the file and changes the allowlist.
 
-## Scope limitations
+Allowed text is also checked for direct Google Drive or Docs object links, email addresses, common token shapes, and private-key headers. These controls reduce accidental disclosure but do not prove that a repository is private-data-free. Review the full tree and Git history before every public release.
 
-The automatic disclosure scan blocks some obviously unsafe strings, such as direct Google Drive document links, email addresses and common token patterns. It is **not** a comprehensive privacy/secret audit. Manually review the directory tree and git history before publication. Do not import file histories from a private research repo into this template; initialize a **new Git history**.
+The private research repository and its history must never be used as the remote or history source for this public template.

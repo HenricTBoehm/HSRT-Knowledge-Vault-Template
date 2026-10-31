@@ -1,6 +1,10 @@
 {
   "template": "HSRT Knowledge Vault Template",
   "purpose": "public source-free starter",
+  "manifest_policy": "The files array lists distributable files and intentionally excludes this manifest to avoid recursive self-reference.",
+  "manifest_excludes": [
+    "template-manifest.json"
+  ],
   "claims": {
     "admitted_concepts": 0,
     "research_findings": 0,

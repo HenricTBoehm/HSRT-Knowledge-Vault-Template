@@ -47,7 +47,7 @@ This repository starts with **zero admitted concepts, zero source records and ze
 ## Review and safety
 
 - `AGENTS.md` states the repository-wide agent restrictions; `60-Knowledge-Pilot/AGENTS.md` specifies pilot workflow (`INGEST`, `QUERY`, `LINT`).
-- Structural validation and the public-disclosure scan are CI checks, **not** scientific validation or executable admission enforcement. Deliberate human review is still required.
+- Structural validation and the public-disclosure scan are CI checks, **not** scientific validation or executable admission enforcement. The disclosure scan blocks non-allowlisted file types and configured sensitive patterns, but deliberate human review is still required.
 - `verified` and `status: stable` in OKF do not imply `ADMIT_TO_WIKI`, external canonical authority or scientific verification.
 - Do not upload private documents, real account identifiers, source texts without rights, personal data or access-controlled URLs to a public instance.
 - A Git merge does not substitute for admission or domain-level approval.
