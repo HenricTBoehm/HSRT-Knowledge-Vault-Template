@@ -35,6 +35,9 @@ Only `60-Knowledge-Pilot/OKF/` targets **Open Knowledge Format (OKF) v0.2**. The
 
 ## Initial use
 
+Start with [START_HERE.md](START_HERE.md) for ready-to-use INGEST, QUERY and LINT prompts.
+
+
 1. Keep original sources in a separate, permission-controlled system. Enter **pointers only**, never raw documents or credentials, into `60-Knowledge-Pilot/RAW/source-register.md`.
 2. Prepare a note from `templates/research-note.md` or `templates/okf-concept.md` on a review branch. Resolve actual source IDs and freeze boundaries; write `UNKNOWN / NOT YET LINKED` where unresolved.
 3. Open an admission record from `templates/admission-record.md`. Review with `60-Knowledge-Pilot/ADMISSION_GATE.md`. The **default is `HOLD`**.
@@ -55,6 +58,10 @@ This repository starts with **zero admitted concepts, zero source records and ze
 ## Publish as an actual GitHub template
 
 See [PUBLISHING.md](PUBLISHING.md). After creating the public repository, enable GitHub's **Template repository** setting. The included publish script can do both when the GitHub CLI is installed and authenticated.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, pull-request, manifest and review requirements.
 
 ## License and provenance
 

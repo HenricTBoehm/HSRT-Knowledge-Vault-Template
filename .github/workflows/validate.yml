@@ -22,5 +22,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: OKF and admission structure
         run: python scripts/validate_vault.py .
+      - name: Template manifest
+        run: python scripts/validate_manifest.py .
       - name: Public disclosure guard
         run: python scripts/audit_public.py .
