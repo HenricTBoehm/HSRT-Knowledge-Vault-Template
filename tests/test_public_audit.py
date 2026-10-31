@@ -53,5 +53,13 @@ class TestPublicAudit(unittest.TestCase):
             (Path(directory) / "note.md").write_bytes(b"\xff\xfe")
             self.assertTrue(any("non-UTF8" in item for item in scan(Path(directory))))
 
+    def test_generated_python_cache_ignored(self):
+        with tempfile.TemporaryDirectory() as directory:
+            cache = Path(directory) / "scripts" / "__pycache__"
+            cache.mkdir(parents=True)
+            (cache / "module.cpython-312.pyc").write_bytes(b"generated")
+            self.assertEqual([], scan(Path(directory)))
+
+
 if __name__ == "__main__":
     unittest.main()

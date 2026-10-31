@@ -16,6 +16,7 @@ CHECKS = [
     ("Private key header", re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----")),
 ]
 SKIP_CONTENT_SCAN = {"scripts/audit_public.py"}
+GENERATED_DIRECTORIES = {".git", "__pycache__", ".pytest_cache", ".mypy_cache"}
 
 def allowed_text_file(path: Path):
     return path.suffix.lower() in ALLOWED_TEXT_SUFFIXES or path.name in ALLOWED_EXTENSIONLESS_NAMES
@@ -23,7 +24,7 @@ def allowed_text_file(path: Path):
 def scan(root: Path) -> list[str]:
     findings = []
     for path in root.rglob("*"):
-        if ".git" in path.parts or not path.is_file():
+        if any(part in GENERATED_DIRECTORIES for part in path.parts) or not path.is_file():
             continue
         relative = path.relative_to(root).as_posix()
         if path.is_symlink():
