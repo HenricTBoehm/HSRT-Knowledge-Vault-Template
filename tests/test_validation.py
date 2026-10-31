@@ -64,6 +64,11 @@ class TestValidation(unittest.TestCase):
             errors = self.concept(directory, "---\ntype: Attested Computation\nruntime: python\nparameters:\n  - {name: value, type: integer, required: true}\nexecutor:\n  resource: references/run.md\n  receipt: [result]\nattester:\n  resource: references/check.py\n---\n\n# Computation\n\n" + fence + "python\nprint(value)\n" + fence + "\n")
             self.assertEqual([], errors)
 
+    def test_valid_tilde_fenced_attested_computation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            errors = self.concept(directory, "---\ntype: Attested Computation\nruntime: python\n---\n\n# Computation\n\n~~~python\nprint(1)\n~~~\n")
+            self.assertEqual([], errors)
+
     def test_attested_computation_requires_runtime(self):
         with tempfile.TemporaryDirectory() as directory:
             fence = chr(96) * 3

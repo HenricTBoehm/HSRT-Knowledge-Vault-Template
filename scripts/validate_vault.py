@@ -91,8 +91,8 @@ def validate_attested_computation(path, meta, body):
     if external is not None and (not isinstance(external, str) or not external.strip()):
         errors.append(f"{path}: computation must be a nonempty path when present")
     section = computation_section(body)
-    marker = chr(96) * 3
-    pattern = r"(?ms)^" + re.escape(marker) + r"[^\n]*\n.*?^" + re.escape(marker) + r"\s*$"
+    marker_pattern = rf"(?:{re.escape(chr(96))}{{3,}}|~{{3,}})"
+    pattern = r"(?ms)^(?P<fence>" + marker_pattern + r")[^\n]*\n.*?^(?P=fence)\s*$"
     fences = [] if section is None else re.findall(pattern, section)
     if external is None:
         if section is None or len(fences) != 1:
